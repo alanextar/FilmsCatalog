@@ -30,14 +30,14 @@
 					@Html.DisplayFor(x => item.Producer)
 				</td>
 				<td>
-					<a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info btn-icon-anim btn-square" title="Просмотр">Просмотр</a>
+					<a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info btn-icon-anim btn-square" title="Просмотр"><i class="fa fa-image"></i></a>
 					@if (Model.UserId.HasValue && Model.UserId == item.OwnerId)
 					{
 						<a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-warning btn-icon-anim btn-square" title="Изменить">
-							Изменить
+							<i class="fa fa-pencil"></i>
 						</a>
 						<a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger btn-icon-anim btn-square" title="Удалить">
-							Удалить
+							<i class="fa fa-remove"></i>
 						</a>
 					}
 				</td>
@@ -47,4 +47,7 @@
 </table>
 
 <br />
-@await Html.PartialAsync("_PagerPartial", Model)
+@if (Model.Items.TotalPages > 1)
+{
+	@await Html.PartialAsync("_PagerPartial", Model)
+}
