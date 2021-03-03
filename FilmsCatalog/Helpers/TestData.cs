@@ -12,6 +12,8 @@ namespace FilmsCatalog.Helpers
 		public static async Task Initialize(ApplicationDbContext context)
 		{
 			var films = new List<Film>();
+			var r = new Random();
+
 			for (int i = 0; i < 100; i++)
 			{
 				films.Add(new Film
@@ -19,6 +21,7 @@ namespace FilmsCatalog.Helpers
 					Title = $"Title #{i}",
 					Description = $"Description #{i}",
 					Producer = $"Producer #{i}",
+					ReleaseYear = 1990 + r.Next(0,30),
 				});
 			}
 
