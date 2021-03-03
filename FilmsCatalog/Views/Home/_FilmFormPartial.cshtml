@@ -23,7 +23,7 @@
 
 <div class="form-group">
 	<label asp-for="ReleaseYear" class="control-label mb-10 text-left"></label>
-	<input name="ReleaseYear" value="@Model.ReleaseYear" type="text" required class="releaseYear form-control title" />
+	<input name="ReleaseYear" value="@(Model.ReleaseYear != 0 ? Model.ReleaseYear : null)" type="text" required class="releaseYear form-control title" />
 	<span asp-validation-for="ReleaseYear" class="text-danger"></span>
 </div>
 
