@@ -1,0 +1,42 @@
+﻿@model FilmsIndexVm
+@{ ViewData["Title"] = "Home Page"; }
+
+@section Styles{
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/fontawesome.min.css" />
+}
+
+<div class="text-center">
+	<div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						<small>
+							@ViewData["PageDescription"]
+						</small>
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="m-portlet__body">
+			@if (Model.UserId.HasValue)
+			{
+<p style="text-align: left; margin-bottom: 16px; "><a asp-action="Create" class="btn btn-success">Добавить</a></p>			
+			}
+			<div class="tab-content">
+				<div class="tab-pane active show">
+					@await Html.PartialAsync("_IndexTablePartial", Model)
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section Scripts{
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/fontawesome.min.js"></script>
+	<script>
+		$(document).ready(function () {
+
+		});
+	</script>
+}

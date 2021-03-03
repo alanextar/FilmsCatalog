@@ -1,0 +1,66 @@
+﻿@model FilmsIndexVm
+@{
+	var prevDisabled = !Model.Items.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.Items.HasNextPage ? "disabled" : "";
+}
+<div class="flex justify-content-center">
+	<div class="pagination flex align-items-center">
+		<a asp-action="Index"
+		   asp-route-pageNumber="@(Model.Items.PageIndex - 1)"
+		   class="pag_prev @prevDisabled">
+			Previous
+		</a>
+		<ul class="pag_list flex">
+			@if (Model.Items.ActiveRangeFrom > 1)
+			{
+<li>
+	<a asp-action="Index"
+	   asp-route-pageNumber="1">
+		<span>1</span>
+	</a>
+</li>}
+
+			@if (Model.Items.ActiveRangeFrom > 2)
+			{
+<li>
+	<a asp-action="Index"
+	   asp-route-pageNumber="@(Model.Items.ActiveRangeFrom - 1)">
+		<span>...</span>
+	</a>
+</li>}
+
+			@for (int i = Model.Items.ActiveRangeFrom; i <= Model.Items.ActiveRangeTo; i++)
+			{
+<li>
+	<a class="@(Model.Items.PageIndex == i ? "active" : "")" asp-action="Index"
+	   asp-route-pageNumber="@i">
+		<span>@i</span>
+	</a>
+</li>}
+
+			@if (Model.Items.TotalPages > Model.Items.PageIndex + 1)
+			{
+<li>
+	<a asp-action="Index"
+	   asp-route-pageNumber="@(Model.Items.ActiveRangeTo + 1)">
+		<span>...</span>
+	</a>
+</li>}
+
+
+			@if (Model.Items.TotalPages > Model.Items.ActiveRangeTo)
+			{
+<li>
+	<a asp-action="Index"
+	   asp-route-pageNumber="@(Model.Items.TotalPages)">
+		<span>@Model.Items.TotalPages</span>
+	</a>
+</li>}
+		</ul>
+		<a asp-action="Index"
+		   asp-route-pageNumber="@(Model.Items.PageIndex + 1)"
+		   class="pag_next @nextDisabled">
+			Next
+		</a>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model FilmsIndexVm
+
+@{
+	var prevDisabled = !Model.Items.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.Items.HasNextPage ? "disabled" : "";
+}
+
+<table class="table mb-0">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Items.First().Title)
+			</th>
+			<th>@Html.DisplayNameFor(model => model.Items.First().ReleaseYear)</th>
+			<th>@Html.DisplayNameFor(model => model.Items.First().Producer)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Items)
+		{
+			<tr style="cursor:pointer;">
+				<td>
+					@Html.DisplayFor(x => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(x => item.ReleaseYear)
+				</td>
+				<td>
+					@Html.DisplayFor(x => item.Producer)
+				</td>
+				<td>
+					<a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info btn-icon-anim btn-square" title="Просмотр">Просмотр</a>
+					@if (Model.UserId.HasValue && Model.UserId == item.OwnerId)
+					{
+						<a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-warning btn-icon-anim btn-square" title="Изменить">
+							Изменить
+						</a>
+						<a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger btn-icon-anim btn-square" title="Удалить">
+							Удалить
+						</a>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<br />
+@await Html.PartialAsync("_PagerPartial", Model)

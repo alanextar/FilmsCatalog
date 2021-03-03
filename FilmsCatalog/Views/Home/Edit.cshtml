@@ -1,0 +1,47 @@
+@model FilmCreateEdit
+
+@{
+	ViewData["Title"] = "Создать новую запись";
+}
+
+@section Styles{
+}
+
+<div class="m-portlet m-portlet--mobile">
+	<div class="m-portlet__head">
+		<div class="m-portlet__head-caption">
+			<div class="m-portlet__head-title">
+				<h3 class="m-portlet__head-text">
+					Каталог фильмов: @ViewData["Title"]
+					<small>
+						@ViewData["PageDescription"]
+					</small>
+				</h3>
+			</div>
+		</div>
+	</div>
+	<div class="m-portlet__body">
+		<form asp-action="Create" enctype="multipart/form-data">
+			<div>
+				<div class="col-md-12">
+					@{ await Html.RenderPartialAsync("_FilmFormPartial.cshtml", Model); }
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<input type="submit" name="draft" value="Сохранить" class="btn btn-success" />
+				<span class="invisible">|</span>
+				<a asp-action="Index" class="btn btn-default">Отмена</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".releaseYear").inputmask("9999");
+		});
+	</script>
+}

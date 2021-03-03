@@ -1,0 +1,32 @@
+@model Film
+
+@{ ViewData["Title"] = "Удалить"; }
+
+<div class="m-portlet m-portlet--mobile">
+	<div class="m-portlet__head">
+		<div class="m-portlet__head-caption">
+			<div class="m-portlet__head-title">
+				<h3 class="m-portlet__head-text">
+					Фильм: @ViewData["Title"]
+					<small>
+						@ViewData["PageDescription"]
+					</small>
+				</h3>
+			</div>
+		</div>
+	</div>
+	<div class="m-portlet__body">
+
+		<h3>Вы действительно хотите удалить эту запись?</h3>
+
+		<form asp-action="Delete">
+			<input type="hidden" asp-for="Id" />
+
+			<div class="col-md-12">
+				<input type="submit" value="Удалить" class="btn btn-success" />
+				<span class="invisible">|</span>
+				<a asp-action="Index" class="btn btn-default">Отмена</a>
+			</div>
+		</form>
+	</div>
+</div>

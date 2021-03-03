@@ -1,0 +1,61 @@
+@model FilmIndexData
+
+@{
+    ViewData["Title"] = "Каталог фильмов";
+}
+
+<div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                    @ViewData["Title"]
+                    <small>
+                        @ViewData["PageDescription"]
+                    </small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="m-portlet__body">
+        ﻿
+		<div>
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.Title)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.Title)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.ReleaseYear)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.ReleaseYear)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.Producer)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.Producer)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.PosterPath)
+				</dt>
+				<dd>
+					<img class="poster" src="@Model.PosterPath">
+				</dd>
+			</dl>
+		</div>
+
+		<div class="col-md-12">
+			@if (Model.IsOwner)
+			{
+				<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Изменить</a>
+				<span class="invisible">|</span>			
+			}
+
+			<a asp-action="Index" class="btn btn-default">Назад к списку</a>
+		</div>
+    </div>
+</div>
