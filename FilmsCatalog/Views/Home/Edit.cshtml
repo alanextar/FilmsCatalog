@@ -11,17 +11,17 @@
 	<div class="m-portlet__head">
 		<div class="m-portlet__head-caption">
 			<div class="m-portlet__head-title">
-				<h3 class="m-portlet__head-text">
+				<h5 class="m-portlet__head-text">
 					Каталог фильмов: @ViewData["Title"]
 					<small>
 						@ViewData["PageDescription"]
 					</small>
-				</h3>
+				</h5>
 			</div>
 		</div>
 	</div>
 	<div class="m-portlet__body">
-		<form asp-action="Create" enctype="multipart/form-data">
+		<form asp-action="Edit" enctype="multipart/form-data">
 			<div>
 				<div class="col-md-12">
 					@{ await Html.RenderPartialAsync("_FilmFormPartial.cshtml", Model); }
@@ -42,6 +42,10 @@
 	<script>
 		$(document).ready(function () {
 			$(".releaseYear").inputmask("9999");
+
+			$("#posterInput").change(function () {
+				readURL(this);
+			});
 		});
 	</script>
 }

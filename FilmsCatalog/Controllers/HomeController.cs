@@ -166,8 +166,9 @@ namespace FilmsCatalog.Controllers
                 if (model.PosterPathUpload.IsDataAvailable())
                 {
                     var imageName = model.PosterPathUpload.FileName.ToLower();
-                    model.PosterPathUpload
+                    var path = model.PosterPathUpload
                         .UploadUniqueImage(_bucket, imageStoragePath, imageName);
+                    film.PosterPath = path.ImagePath;
                 }
 
                 try
